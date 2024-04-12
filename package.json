@@ -22,9 +22,19 @@
     "packages/*"
   ],
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@geist-ui/core": "^2.3.8",
+    "@geist-ui/react": "^2.2.5",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/material": "^5.15.15",
     "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.0",
+    "framer-motion": "^11.0.25",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.13",
-    "recoil": "^0.7.7"
+    "react-arborist": "^3.4.0",
+    "recoil": "^0.7.7",
+    "tailwind-merge": "^2.2.2"
   }
 }
