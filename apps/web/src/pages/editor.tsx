@@ -8,6 +8,7 @@ import {
 // import { Tree } from "@geist-ui/react";
 import { Tree } from "react-arborist";
 import { FileTree } from "@/components/ui/FileTree";
+import { CodeEditor } from "@/components/ui/Editor";
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { username, repl } = context.query;
 
@@ -37,11 +38,11 @@ const Editor: React.FC<EditorProps> = (props) => {
          <FileTree /> 
         </ResizablePanel>
         <ResizableHandle className="bg-[#27272A]" />
-        <ResizablePanel>Two</ResizablePanel>
+        <ResizablePanel><CodeEditor /></ResizablePanel>
         <ResizableHandle className="bg-[#27272A]" />
         <ResizablePanel>
           <ResizablePanelGroup direction="vertical">
-            <ResizablePanel>Two</ResizablePanel>
+            <ResizablePanel>hi</ResizablePanel>
             <ResizableHandle className="bg-[#27272A]" />
             <ResizablePanel>Three</ResizablePanel>
           </ResizablePanelGroup>

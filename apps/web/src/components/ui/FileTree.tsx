@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { isValid } from "zod";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { fileClicked } from "@/atoms/EditorPage/fileClicked";
 import { openTabs } from "@/atoms/EditorPage/openTabs";
 import { currentTab } from "@/atoms/EditorPage/currentTab";
@@ -91,7 +91,7 @@ const Folder: React.FC<FolderInterFace> = (props) => {
 const File: React.FC<FileInterface> = (props) => {
   const { name } = props;
   const setFileClicked = useSetRecoilState(fileClicked);
-  const setOpenTabs = useSetRecoilState(openTabs);
+  const [openTabsValue, setOpenTabsValue] = useRecoilState(openTabs);
   const setCurrentTab = useSetRecoilState(currentTab);
 
   const getLogo = (name: string): React.ReactElement | null => {
@@ -112,7 +112,9 @@ const File: React.FC<FileInterface> = (props) => {
       onClick={() => {
         console.log(name, " was clicked!");
         setFileClicked((_prev) => name);
-        setOpenTabs((prev) => [...prev, name]);
+        if (!openTabsValue.find(tab => tab === name)) {
+          setOpenTabsValue(prev => [...prev, name]);
+        }
         setCurrentTab((_prev) => name);
       }}
       className="m-1 flex h-[3vh] w-full cursor-pointer items-center rounded-sm p-2 text-white hover:bg-[#27272A]"
