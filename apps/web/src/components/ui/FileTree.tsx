@@ -1,50 +1,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { isValid } from "zod";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { fileClicked } from "@/atoms/EditorPage/fileClicked";
 import { openTabs } from "@/atoms/EditorPage/openTabs";
 import { currentTab } from "@/atoms/EditorPage/currentTab";
+import { fileTree } from "@/atoms/EditorPage/fileTree";
 
 export const FileTree: React.FC = () => {
-  const [files, setFiles] = useState<IChildren[]>([
-    {
-      name: "index.html",
-      type: "file",
-    },
-    {
-      name: "index.js",
-      type: "file",
-    },
-    {
-      name: "index.css",
-      type: "file",
-    },
-    {
-      name: "components",
-      type: "folder",
-      children: [
-        {
-          name: "login.js",
-          type: "file",
-        },
-        {
-          name: "signup.js",
-          type: "file",
-        },
-        {
-          name: "ui",
-          type: "folder",
-          children: [
-            {
-              name: "button.js",
-              type: "file",
-            },
-          ],
-        },
-      ],
-    },
-  ]);
+  const files = useRecoilValue(fileTree);  
 
   return (
     <div className="mt-4">
@@ -112,8 +76,8 @@ const File: React.FC<FileInterface> = (props) => {
       onClick={() => {
         console.log(name, " was clicked!");
         setFileClicked((_prev) => name);
-        if (!openTabsValue.find(tab => tab === name)) {
-          setOpenTabsValue(prev => [...prev, name]);
+        if (!openTabsValue.find((tab) => tab === name)) {
+          setOpenTabsValue((prev) => [...prev, name]);
         }
         setCurrentTab((_prev) => name);
       }}

@@ -4,26 +4,25 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { currentTab } from "@/atoms/EditorPage/currentTab";
 import { openTabs } from "@/atoms/EditorPage/openTabs";
+import { fileTree } from "@/atoms/EditorPage/fileTree";
 
 export const Tabs: React.FC = () => {
-
-    const openTabsValue = useRecoilValue(openTabs);
+  const openTabsValue = useRecoilValue(openTabs);
 
   return (
     <div>
       <div className="scrolling-hide flex min-h-[4vh] rounded-sm text-white">
-        {
-            openTabsValue.map(tab => {
-                if (tab.length > 1) {
-                    return (
-                        <SingleTab name={tab} />
-                    )
-                }
-            })
-        }
+        {openTabsValue.map((tab) => {
+          if (tab.length > 1) {
+            return <SingleTab name={tab} />;
+          }
+        })}
       </div>
       <div>
         <hr className="m-0 h-[1px] border-none bg-[#27272A]" />
+      </div>
+      <div>
+        <BreadCrumb />
       </div>
     </div>
   );
@@ -32,6 +31,60 @@ export const Tabs: React.FC = () => {
 interface ISingleTab {
   name: string;
 }
+
+interface IChildren {
+  name: string;
+  type: "file" | "folder";
+  children?: IChildren[];
+}
+
+const BreadCrumb: React.FC = () => {
+  const currentTabValue = useRecoilValue(currentTab);
+  const files = useRecoilValue(fileTree);
+
+  const findParentStructure = (
+    tree: IChildren[],
+    fileName: string,
+    parentStructure = ["apps"],
+    allPaths = [],
+  ) => {
+    for (const item of tree) {
+      if (item.name === fileName) {
+        //@ts-ignore
+        allPaths.push([...parentStructure, item.name]); // Store the path
+      }
+      if (item.type === "folder") {
+        const parent = [...parentStructure, item.name];
+        //@ts-ignore
+        findParentStructure(item.children, fileName, parent, allPaths);
+      }
+    }
+    return allPaths.length > 0 ? allPaths : null; // Return all paths if found, null otherwise
+  };
+
+  //@ts-ignore
+  const paths = findParentStructure(files, currentTabValue);
+  console.log(paths);
+
+  return (
+    <div className="mt-2" >
+      <div className="flex justify-start">
+        {paths && typeof paths[0] !== undefined && paths[0].map((path) => {
+          console.log(path);
+          return (
+            <div className="flex">
+              <div className="m-1 ml-4 hover:underline hover:text-gray-300 hover:cursor-pointer ">{path}</div>
+              <div className="ml-4 flex items-center">&gt;</div>
+            </div>
+          );
+        })}
+      </div>
+      <div>
+        <hr className="border-none h-[1px] mt-2 bg-[#27272A]" />
+      </div>
+    </div>
+  );
+};
 
 const SingleTab: React.FC<ISingleTab> = (props) => {
   const { name } = props;
@@ -63,9 +116,11 @@ const SingleTab: React.FC<ISingleTab> = (props) => {
         <div>{getLogo(name)}</div>
         <div className="ml-2">{name}</div>
       </div>
-      <div onClick={() => {
-        setOpenTabs(prev => prev.filter(p => p !== name));
-      }} >
+      <div
+        onClick={() => {
+          setOpenTabs((prev) => prev.filter((p) => p !== name));
+        }}
+      >
         <CloseIcon className="rounded-full text-sm hover:bg-[#09090B]" />
       </div>
     </div>
