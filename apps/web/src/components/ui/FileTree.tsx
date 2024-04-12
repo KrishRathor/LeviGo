@@ -3,6 +3,8 @@ import Image from "next/image";
 import { isValid } from "zod";
 import { useSetRecoilState } from "recoil";
 import { fileClicked } from "@/atoms/EditorPage/fileClicked";
+import { openTabs } from "@/atoms/EditorPage/openTabs";
+import { currentTab } from "@/atoms/EditorPage/currentTab";
 
 export const FileTree: React.FC = () => {
   const [files, setFiles] = useState<IChildren[]>([
@@ -89,6 +91,8 @@ const Folder: React.FC<FolderInterFace> = (props) => {
 const File: React.FC<FileInterface> = (props) => {
   const { name } = props;
   const setFileClicked = useSetRecoilState(fileClicked);
+  const setOpenTabs = useSetRecoilState(openTabs);
+  const setCurrentTab = useSetRecoilState(currentTab);
 
   const getLogo = (name: string): React.ReactElement | null => {
     const lastDotIndex = name.lastIndexOf(".");
@@ -104,12 +108,15 @@ const File: React.FC<FileInterface> = (props) => {
   };
 
   return (
-    <div 
+    <div
       onClick={() => {
-        console.log(name, ' was clicked!');
-        setFileClicked(_prev => name);
+        console.log(name, " was clicked!");
+        setFileClicked((_prev) => name);
+        setOpenTabs((prev) => [...prev, name]);
+        setCurrentTab((_prev) => name);
       }}
-    className="m-1 flex h-[3vh] w-full cursor-pointer items-center rounded-sm p-2 text-white hover:bg-[#27272A]">
+      className="m-1 flex h-[3vh] w-full cursor-pointer items-center rounded-sm p-2 text-white hover:bg-[#27272A]"
+    >
       <div className="flex items-center">
         <div>{getLogo(name)}</div>
         <div className="ml-2">{name}</div>
