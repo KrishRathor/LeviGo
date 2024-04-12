@@ -69,7 +69,10 @@ const BreadCrumb: React.FC = () => {
   return (
     <div className="mt-2" >
       <div className="flex justify-start">
-        {paths && typeof paths[0] !== undefined && paths[0].map((path) => {
+        
+        {
+            //@ts-ignore
+        paths && typeof paths[0] !== undefined && paths[0].map((path) => {
           console.log(path);
           return (
             <div className="flex">
