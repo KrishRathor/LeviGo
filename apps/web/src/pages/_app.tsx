@@ -7,6 +7,7 @@ import "@/styles/globals.css";
 import { RecoilRoot } from "recoil";
 import { ToastContainer } from "react-toastify";
 import Head from "next/head";
+import { TerminalContextProvider } from "react-terminal";
 
 const inter = Inter({
   subsets: ["latin"],

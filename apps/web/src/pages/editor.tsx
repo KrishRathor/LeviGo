@@ -9,6 +9,7 @@ import {
 import { Tree } from "react-arborist";
 import { FileTree } from "@/components/ui/FileTree";
 import { CodeEditor } from "@/components/ui/Editor";
+import { TerminalUI } from "@/components/ui/Terminal";
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { username, repl } = context.query;
 
@@ -44,7 +45,7 @@ const Editor: React.FC<EditorProps> = (props) => {
           <ResizablePanelGroup direction="vertical">
             <ResizablePanel>hi</ResizablePanel>
             <ResizableHandle className="bg-[#27272A]" />
-            <ResizablePanel>Three</ResizablePanel>
+            <ResizablePanel><TerminalUI /></ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>
       </ResizablePanelGroup>
