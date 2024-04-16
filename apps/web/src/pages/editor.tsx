@@ -10,6 +10,8 @@ import { Tree } from "react-arborist";
 import { FileTree } from "@/components/ui/FileTree";
 import { CodeEditor } from "@/components/ui/Editor";
 import { TerminalUI } from "@/components/ui/Terminal";
+import { Browser } from "@/components/ui/Browser";
+import { Button } from "@/components/ui/button"
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { username, repl } = context.query;
 
@@ -31,21 +33,33 @@ const Editor: React.FC<EditorProps> = (props) => {
 
   return (
     <div className="m-0 h-[92vh] w-screen p-0">
-      <div className="h-[8vh] border-b border-[#27272A] bg-[#09090B] text-white">
-        hi there
+      <div className="h-[8vh] border-b flex items-center justify-between border-[#27272A] bg-[#09090B] text-white">
+        <div className="text-3xl p-4" >
+          LeviGo
+        </div>
+        <div className="flex justify-between" >
+          <Button variant='outline' className="ml-2 bg-[#0E1525] text-white" >Run</Button>
+          <Button variant='outline' className="ml-2 mr-4 bg-[#0E1525] text-white" >Invite</Button>
+        </div>
       </div>
       <ResizablePanelGroup className="bg-[#09090B]" direction="horizontal">
-        <ResizablePanel defaultSize={15} >
-         <FileTree /> 
+        <ResizablePanel defaultSize={15}>
+          <FileTree />
         </ResizablePanel>
         <ResizableHandle className="bg-[#27272A]" />
-        <ResizablePanel><CodeEditor /></ResizablePanel>
+        <ResizablePanel>
+          <CodeEditor />
+        </ResizablePanel>
         <ResizableHandle className="bg-[#27272A]" />
         <ResizablePanel>
           <ResizablePanelGroup direction="vertical">
-            <ResizablePanel>hi</ResizablePanel>
+            <ResizablePanel>
+              <Browser />
+            </ResizablePanel>
             <ResizableHandle className="bg-[#27272A]" />
-            <ResizablePanel><TerminalUI /></ResizablePanel>
+            <ResizablePanel>
+              <TerminalUI />
+            </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>
       </ResizablePanelGroup>

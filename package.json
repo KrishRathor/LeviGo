@@ -31,6 +31,7 @@
     "@mui/material": "^5.15.15",
     "@xterm/xterm": "^5.5.0",
     "bcryptjs": "^2.4.3",
+    "child_process": "^1.0.2",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.25",
     "i": "^0.3.7",
