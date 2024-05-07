@@ -118,6 +118,7 @@ export const userRouter = router({
                     user: null,
                     token: null
                 }
+                console.log('payload', payload);
                 const token = jwt.sign(payload, secret);
                 return {
                     code: HttpStatusCode.Accepted,

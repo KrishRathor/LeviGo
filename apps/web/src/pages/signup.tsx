@@ -108,7 +108,7 @@ const Signup: React.FC = () => {
                         type="text"
                         name="username"
                         placeholder="Username"
-                        className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground"
+                        className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground text-white"
                         onChange={(e) => {
                           setFormData((prev) => ({
                             ...prev,
@@ -132,7 +132,7 @@ const Signup: React.FC = () => {
                           type="email"
                           name="email"
                           placeholder="email"
-                          className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
+                          className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground text-white"
                           onChange={(e) => {
                             setFormData((prev) => ({
                               ...prev,
@@ -157,7 +157,7 @@ const Signup: React.FC = () => {
                           type="password"
                           name="password"
                           placeholder="password"
-                          className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
+                          className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground text-white"
                           onChange={(e) => {
                             setFormData((prev) => ({
                               ...prev,

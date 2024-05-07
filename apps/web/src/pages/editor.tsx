@@ -12,24 +12,26 @@ import { CodeEditor } from "@/components/ui/Editor";
 import { TerminalUI } from "@/components/ui/Terminal";
 import { Browser } from "@/components/ui/Browser";
 import { Button } from "@/components/ui/button"
+
+ 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { username, repl } = context.query;
+  const { project, repl } = context.query;
 
   return {
     props: {
-      username: username,
+      project: project,
       repl: repl,
     },
   };
 };
 
 interface EditorProps {
-  username?: string;
+  project ?: string;
   repl?: string;
 }
 
 const Editor: React.FC<EditorProps> = (props) => {
-  const { username, repl } = props;
+  const { project, repl } = props;
 
   return (
     <div className="m-0 h-[92vh] w-screen p-0">

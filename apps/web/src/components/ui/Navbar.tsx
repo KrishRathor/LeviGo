@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
         <p className=" cursor-pointer hover:text-gray-400 hover:underline">
           Home
         </p>
-        <p className="ml-4 cursor-pointer hover:text-gray-400 hover:underline">
+        <p  className="ml-4 cursor-pointer hover:text-gray-400 hover:underline">
           Editor
         </p>
       </div>

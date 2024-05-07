@@ -18,6 +18,8 @@ import React, { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { api } from "@/utils/api";
+import { useRouter } from "next/router";
 
 const Home: React.FC = () => {
   return (
@@ -58,9 +60,35 @@ interface ReplProps {
 
 const Repl: React.FC<ReplProps> = (props) => {
   const { template } = props;
-  const [projectName, setProejctName] = useState<string>();
+  const [projectName, setProejctName] = useState<string>('');
   const [templateValue, setTemplateValue] = useState<string>();
+  const router = useRouter();
 
+  const executeCommand = api.code.getBoilerPlateCodeInRepl.useMutation({
+    onSuccess: data => {
+    console.log('command executed', data);
+    }
+  })
+  
+  const createRepl = api.code.createRepl.useMutation({
+    onSuccess: async data => {
+      console.log(data);
+      executeCommand.mutateAsync({
+        projectName: projectName,
+        repl: template 
+      })
+      router.push(`editor?project=${projectName}&repl=${template}`);
+    }
+  });
+ 
+  const handleCreateRepl = async () => {
+    console.log('i was here');
+    createRepl.mutateAsync({
+      projectName: projectName,
+      repl: template
+    })
+  }
+  
   return (
     <div>
       <p className="text-2xl">Create new Project</p>
@@ -70,17 +98,20 @@ const Repl: React.FC<ReplProps> = (props) => {
       <br />
       <div>
         <p>Name</p>
-        <Input className="mt-2 border-[#27272A] bg-[#09090B]" />
+        <Input
+          onChange={(e) => setProejctName((_prev) => e.target.value)}
+          className="mt-2 border-[#27272A] bg-[#09090B]"
+        />
       </div>
       <div className="mt-4">
-        <p>{template}</p>
+        <p>Set template</p>
         <ComboboxDemo />
       </div>
       <div className="mt-4 flex">
         <Button variant="outline" className="text-black">
           Cancel
         </Button>
-        <Button variant="outline" className="ml-4 text-black">
+        <Button onClick={handleCreateRepl} variant="outline" className="ml-4 text-black">
           Create
         </Button>
       </div>
@@ -215,8 +246,11 @@ const ComboboxDemo: React.FC = () => {
   useEffect(() => {
     if (searchValue) {
       const length = searchValue.length;
-      const newframes = frameworks.filter(frame => frame.label.toLowerCase().substring(0, length) === searchValue);
-      setFrameworks(_prev => newframes);
+      const newframes = frameworks.filter(
+        (frame) =>
+          frame.label.toLowerCase().substring(0, length) === searchValue,
+      );
+      setFrameworks((_prev) => newframes);
     } else {
       setFrameworks(temp);
     }
@@ -246,12 +280,14 @@ const ComboboxDemo: React.FC = () => {
             placeholder="Search Framework"
             className="bg-[#09090B] text-white"
             onChange={(e) => {
-              setSearchValue(_prev => e.target.value);
+              console.log(e.target.value);
+              setSearchValue((_prev) => e.target.value);
             }}
           />
           <CommandGroup>
-            {frameworks.map((framework) => (
+            {frameworks.map((framework, index) => (
               <div
+                key={index}
                 className="m-2 h-[4vh] cursor-pointer rounded-sm bg-[#09090B] p-2 text-white hover:bg-[#27272A]"
                 onClick={() => {
                   setValue((_prev) => framework.value);

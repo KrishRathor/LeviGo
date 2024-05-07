@@ -50,7 +50,7 @@ const Login: React.FC = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 text-white"
               >
                 <path
                   strokeLinecap="round"
@@ -59,7 +59,7 @@ const Login: React.FC = () => {
                 />
               </svg>
             </div>
-            Xiscord
+            <p className="text-white" >LeviGo</p>
           </div>
         </a>
         <div className="relative mt-12 w-full max-w-lg sm:mt-10">
@@ -101,7 +101,7 @@ const Login: React.FC = () => {
                         type="email"
                         name="email"
                         placeholder="email"
-                        className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground"
+                        className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground text-white"
                         onChange={(e) => {
                           setFormData((prev) => ({
                             ...prev,
@@ -116,7 +116,7 @@ const Login: React.FC = () => {
                   <div>
                     <div className="group relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                       <div className="flex justify-between">
-                        <label className="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">
+                        <label className="text-white text-xs font-medium text-muted-foreground group-focus-within:text-white">
                           Password
                         </label>
                       </div>
@@ -125,7 +125,7 @@ const Login: React.FC = () => {
                           type="password"
                           name="password"
                           placeholder="password"
-                          className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
+                          className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground text-white"
                           onChange={(e) => {
                             setFormData((prev) => ({
                               ...prev,
@@ -139,7 +139,7 @@ const Login: React.FC = () => {
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <a
-                    className="text-sm font-medium text-foreground underline"
+                    className="text-sm text-white font-medium text-foreground underline"
                     href="/forgot-password"
                   >
                     Forgot password?
@@ -147,7 +147,7 @@ const Login: React.FC = () => {
                 </div>
                 <div className="mt-4 flex items-center justify-end gap-x-2">
                   <a
-                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:ring hover:ring-white h-10 px-4 py-2 duration-200"
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:ring hover:ring-white h-10 px-4 py-2 duration-200 hover:text-black"
                     href="/signup"
                   >
                     Signup
